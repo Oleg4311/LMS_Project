@@ -3,7 +3,6 @@ require('@babel/register');
 require('dotenv').config();
 
 const app = express();
-// eslint-disable-next-line import/no-extraneous-dependencies
 const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
