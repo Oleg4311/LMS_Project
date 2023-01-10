@@ -13,17 +13,28 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      email: {
+      login: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      name: {
+      email: {
         allowNull: false,
         type: Sequelize.STRING,
       },
       password: {
         allowNull: false,
         type: STRING,
+      },
+      role: {
+        allowNull: false,
+        type: STRING,
+      },
+      group_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Groups",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,

@@ -5,12 +5,13 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // this.hasMany(models.Game, { foreignKey: "userId" });
+      this.belongsTo(models.Group, { foreignKey: 'id' });
+      this.hasMany(models.Event, { foreignKey: "user_id" });
     }
   }
   User.init(
     {
-      name: {
+      login: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -21,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       password: DataTypes.STRING,
+      role: DataTypes.STRING,
+      group_id: DataTypes.INTEGER,
     },
     {
       sequelize,
