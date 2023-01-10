@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Group, { foreignKey: 'id' });
       this.hasMany(models.Event, { foreignKey: "user_id" });
+      this.hasMany(models.Member, { foreignKey: "user_id" });
+      this.hasMany(models.UserInfo, { foreignKey: "user_id" });
+      this.hasMany(models.Vote, { foreignKey: "user_id" });
+      this.hasMany(models.Answer, { foreignKey: "user_id" });
     }
   }
   User.init(

@@ -3,23 +3,25 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Group extends Model {
+  class File extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.User, { foreignKey: "group_id" });
-      this.hasMany(models.Lecture, { foreignKey: "group_id" });
-      this.hasMany(models.Vote, { foreignKey: "group_id" });
+      this.belongsTo(models.Lectures, { foreignKey: 'id' });
     }
   }
-  Group.init({
-    name: DataTypes.TEXT
+  File.init({
+    name: DataTypes.TEXT,
+    type: DataTypes.TEXT,
+    description: DataTypes.TEXT,
+    url: DataTypes.TEXT,
+    lectures_id: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Group',
+    modelName: 'File',
   });
-  return Group;
+  return File;
 };
