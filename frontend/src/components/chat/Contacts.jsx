@@ -41,7 +41,7 @@ function ContactItem({chat}) {
                       dispatch(setChatIdAC(chat.id));
                   }}>
             <ListItemAvatar>
-                <Avatar>
+                <Avatar src={`/images/${chat?.User?.UserInfos?.[0]?.photo}`}>
                     <ImageIcon />
                 </Avatar>
             </ListItemAvatar>

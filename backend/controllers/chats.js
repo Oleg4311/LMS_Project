@@ -1,5 +1,5 @@
 const {Op, fn, col} = require('sequelize');
-const {User, UserChat, Room, Message} = require('../db/models');
+const {User, UserChat, Room, Message, UserInfo} = require('../db/models');
 
 exports.findOrCreateChat = async (req, res) => {
     try {
@@ -8,6 +8,9 @@ exports.findOrCreateChat = async (req, res) => {
         const chats = await UserChat.findAll({
             attributes: ['room_id', [fn('COUNT', col('room_id')), 'count_users']],
             where: {
+                profile_id: {
+                    [Op.not]: null
+                },
                 [Op.or]: [
                     {user_id: currentUserId},
                     {
@@ -34,6 +37,7 @@ exports.findOrCreateChat = async (req, res) => {
                 id, name
             } = await UserChat.create({
                 user_id: currentUserId,
+                profile_id: userId,
                 room_id: newRoom.id,
                 name: userId === currentUserId ? "Сохраненные сообщения" : login,
                 isGroup: false,
@@ -41,6 +45,7 @@ exports.findOrCreateChat = async (req, res) => {
             if (userId !== currentUserId) {
                 await UserChat.create({
                     user_id: userId,
+                    profile_id: currentUserId,
                     room_id: newRoom.id,
                     name: currentUserName,
                     isGroup: false,
@@ -77,6 +82,13 @@ exports.findAllChatsForCurrentUser = async (req, res) => {
                 where: {
                     user_id: req.session.currentUserId,
                     isGroup: false,
+                }, include: {
+                    model: User,
+                    attributes: ['id'],
+                    include: {
+                        model: UserInfo,
+                        attributes: ['photo']
+                    }
                 }
             })
             res.json({
@@ -94,20 +106,28 @@ exports.findHistoryForChat = async (req, res) => {
     try {
         if (req.session.currentUserName) {
             const {id} = req.params;
-            const {room_id, name} = await UserChat.findOne({
+            const chat = await UserChat.findOne({
                 where: {
                     id
+                },
+                include: {
+                    model: User,
+                    attributes: ['id'],
+                    include: {
+                        model: UserInfo,
+                        attributes: ['photo']
+                    }
                 }
             })
             const room = await Room.findOne({
                 where: {
-                    id: room_id
+                    id: chat.room_id
                 }
             });
 
             const messages = await Message.findAll({
                 where: {
-                    room_id
+                    room_id: chat.room_id
                 },
                 include: {
                     model: User,
@@ -121,7 +141,8 @@ exports.findHistoryForChat = async (req, res) => {
                     user_name: message.dataValues.User.dataValues.login,
                     isRead: message.dataValues.isRead
                 })),
-                name,
+                name: chat.name,
+                img: chat?.dataValues?.User?.dataValues?.UserInfos?.[0]?.dataValues?.photo,
                 isPublic: !!room.dataValues.name,
                 our_id: req.session.currentUserId,
             });
