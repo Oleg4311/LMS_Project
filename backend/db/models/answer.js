@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'user_id' });
-      this.belongsTo(models.Vote, { foreignKey: 'id' });
+      this.belongsTo(models.Vote, { foreignKey: 'vote_id' });
     }
   }
   Answer.init({
