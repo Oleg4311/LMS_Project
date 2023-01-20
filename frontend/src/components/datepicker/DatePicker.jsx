@@ -31,7 +31,7 @@ const messages = {
         previous: 'Предыдущий',
         next: 'Следующий',
         today: 'Сегодня',
-        agenda: 'Повестка дня',
+        agenda: 'Повестка месяца',
         showMore: (total) => `+${total} еще`,
     }
 
