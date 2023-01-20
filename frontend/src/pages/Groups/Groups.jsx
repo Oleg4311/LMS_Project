@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Typography } from '@mui/material';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -56,7 +57,7 @@ export default function Groups() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}>{"Группы"}</StyledTableCell>
+            <StyledTableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: "#44014C", width: "100%", minHeight: "50px"}}><Typography variant="h6" sx={{fontWeight: 'bold'}}>{"Группы"}</Typography></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -64,7 +65,7 @@ export default function Groups() {
             {return (
             <StyledTableRow key={crypto.randomUUID()}>
                 <StyledTableCell style={{ cursor: "pointer"}} align="center" component="th" scope="row" onClick={() => {navigate(`/groups/${item.id}`); getGroup(item.id)}}>
-                    {item.name}
+                <Typography sx={{fontWeight: 'bold'}}>{item.name}</Typography>
                 </StyledTableCell>
             </StyledTableRow>
             )}

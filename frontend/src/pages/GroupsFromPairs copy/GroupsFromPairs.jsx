@@ -37,24 +37,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function GroupsFromPairs() {
-
-    const [groupid, setGroupid] = React.useState();
-    const [groupname, setGroupname] = React.useState();
-
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
     
     const groups = useSelector((store) => store.groups);
-    console.log("🚀 ~ file: GroupsFromPairs.jsx:48 ~ GroupsFromPairs ~ GROUPS", groups)
-    const store = useSelector((store) => store.group);
-    console.log("🚀 ~ file: GroupsFromPairs.jsx:48 ~ GroupsFromPairs ~ STORE", store)
-    const getUserRole = useSelector((store) => store.profile.userRole);
-    console.log("🚀 ~ file: GroupsFromPairs.jsx:46 ~ GroupsFromPairs ~ getUserRole", getUserRole)
-    const getUserPROFILE = useSelector((store) => store.profile);
-    console.log("🚀 ~ file: GroupsFromPairs.jsx:53 ~ GroupsFromPairs ~ getUserPROFILE", getUserPROFILE)
-    const getUserId = useSelector((store) => store.profile.userId);
-    console.log("🚀 ~ file: GroupsFromPairs.jsx:53 ~ GroupsFromPairs ~ getUserId", getUserId)
 
     function getGroup(id){
         dispatch(initGroupAC(id));
@@ -64,30 +51,8 @@ export default function GroupsFromPairs() {
         dispatch(initGroupsAC());
     }, []);
 
-    useEffect(() => {
-      const dataFetch = async () => {
-        const data = await (
-          await fetch(
-            "/userinfo"
-          )
-        ).json();
-        setGroupid(data.Group.id);
-        setGroupname(data.Group.name);
-        console.log('DATA', data);
-      };
-      dataFetch();
-  
-    }, []);
-
-    console.log("🚀 ~ file: GroupsFromPairs.jsx:76 ~ useEffect ~ groupNAME", groupname)
-    useEffect(() => {
-      navigate(`/pairs/${groupid ? groupid : ''}`);
-      }, [groupid]);
-
 
   return (
-    <>
-    { (getUserRole !== 'student') ? (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -108,8 +73,6 @@ export default function GroupsFromPairs() {
         </TableBody>
       </Table>
     </TableContainer>
-    ) : (<div>Идёт загрузка...</div>)}
-    </>
-  )
+  );
 }
 

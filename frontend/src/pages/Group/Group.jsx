@@ -11,8 +11,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import BackButton from '../../components/backButton/BackButton';
 import { initUserInfoAC } from '../../store/userInfo/actionsCreators';
+import { Typography } from '@mui/material';
+import BackButtonWhite from '../../components/backButtonWhite/BackButtonWhite';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -58,14 +59,14 @@ export default function Group() {
       <Table>
         <tbody>
           <TableRow style={{ minHeight: "100px", maxHeight: "100px"}}>
-              <TableCell style={{ display: 'table-cell', alignItems: 'center', width: "5%"}} align="left">
-              <BackButton/>
-              </TableCell>
-              <TableCell style={{ display: 'table-cell', color: "white", backgroundColor: "#44014C", alignItems: 'center', width: "95%"}} align="center" colSpan={4}>
-              {nameGroup}
-              </TableCell>
-            </TableRow>
-          </tbody>
+            <TableCell style={{ display: 'flex', position: 'relative', color: "white", backgroundColor: "#44014C", alignItems: 'center'}} align="center" colSpan={4}>
+              <BackButtonWhite sx={{position: 'absolute', color: 'white'}}/>
+              <div style={{display: "inline-block", textAlign: "center", width: "100%"}}>
+                <Typography variant="h6" align="center" sx={{fontWeight: 'bold',}}>{nameGroup}</Typography>
+              </div>
+            </TableCell>
+          </TableRow>
+        </tbody>
       </Table>
       <Table style={{tableLayout: 'fixed', width: '100%'}} sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -75,7 +76,7 @@ export default function Group() {
             {return (
             <StyledTableRow key={crypto.randomUUID()}>
                 <StyledTableCell style={{ display: 'table-cell', justifyContent: 'center', alignItems: 'center', cursor: "pointer", width: "100%", minHeight: "50px"}} align="center" colSpan={5} component="th" scope="row" onClick={() => {navigate(`/userinfo/${item.user_id}`)}}>
-                    {item.name ? (item.name + ' ' + item.surname) : "Список студентов ещё не сформирован"}
+                <Typography>{item.name ? (item.name + ' ' + item.surname) : "Список студентов ещё не сформирован"}</Typography>
                 </StyledTableCell>
             </StyledTableRow>
             )}

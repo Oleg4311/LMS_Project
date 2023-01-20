@@ -71,7 +71,6 @@ export default function Codereview() {
             )
           ).json();
           // set state when the data received
-          console.log("QQQQQQQQQQ",data)
           setStudents(data[0].UserInfos.map(({ user_id, name, surname }) => ({
             label: `${name} ${surname}`,
             id:user_id
@@ -88,7 +87,6 @@ export default function Codereview() {
     }
     const formHandlerStudent = (e,v) => {
         setStudentsinput(v)
-        console.log(v)
         // setDatainput((preMy) => ({ ...preMy, [e.target.name]: e.target.value }))
     }
     const [valuedate, setValuedate] = React.useState(dayjs('2023-01-01T21:11:54'));
@@ -105,10 +103,7 @@ export default function Codereview() {
       };
 
 
-    //   const handleChangeTimeEnd= (newValue) => {
-    //     setValuetimeend(newValue);
-    //   };
-    // console.log(valuedate.toISOString().substring(10))
+
   return (<>
       <Collapse in={open}>
         <Alert
@@ -138,6 +133,7 @@ export default function Codereview() {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Группа" />}
     />
+    <br/>
     <Autocomplete
       disablePortal
       id="combo-box-demo"
@@ -148,6 +144,7 @@ export default function Codereview() {
       renderInput={(params) => <TextField {...params} label="Студент" />}
     />
              <div>
+             <br/>
              <DesktopDatePicker
           label="Дата"
           inputFormat="MM/DD/YYYY"
@@ -156,6 +153,7 @@ export default function Codereview() {
           renderInput={(params) => <TextField {...params} />}
         />
         </div>
+        <br/>
               <TimePicker
         label="Время начала"
         value={valuetimestart}
@@ -172,7 +170,8 @@ export default function Codereview() {
         }}
         renderInput={(params) => <TextField {...params} />}
       />
-      <div>
+      <br/>
+      <br/>
               <TextField
               onChange={handleChangeTheme}
           id="outlined-multiline-flexible"
@@ -180,7 +179,9 @@ export default function Codereview() {
           multiline
           maxRows={4}
         />
-      </div>
+        <br/>
+      
+      <br/>
               <Button variant="contained" color="success" onClick={createEvent}>
         Назначить встречу
       </Button>

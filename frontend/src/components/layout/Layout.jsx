@@ -100,7 +100,6 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 
 function Layout({children}) {
     const getUserRole = useSelector((store) => store.profile.userRole);
-    console.log(getUserRole)
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 

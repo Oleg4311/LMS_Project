@@ -23,7 +23,6 @@ export default function Materials() {
   // const getUserRole = useSelector((store) => store.profile.userRole);
   const getUserRole = useSelector((store) => store);
   const getUserId = useSelector((store) => store.profile.userId);
-  console.log(getUserId)
 
   useEffect(() => {
     // fetch data
@@ -39,8 +38,6 @@ export default function Materials() {
     };
     dataFetch();
   }, []);
-  // console.log(datainput.groups[0].id)
-  console.log(groupid)
 
 //   const sendMaterial = async () => {
 //     try {
@@ -99,11 +96,9 @@ const sendFile = async () => {
   }
 
   
-  // console.log(datainput)
     const dispatch = useDispatch();
     const {id} = useParams();
     const group = useSelector((store) => store.materials);
-    // console.log(';;;;;;;',group)
     const preventDefault = (event) => event.preventDefault();
 
 
@@ -160,6 +155,7 @@ const sendFile = async () => {
     </Grid>
     <Grid item xs={8}>
     <h2>Добавить материал</h2>
+    
     <TextField
           onChange={formHandler}
           id="outlined-multiline-flexible"
@@ -167,7 +163,6 @@ const sendFile = async () => {
           name="name"
           multiline
           maxRows={4}
-
         />
             <TextField
           onChange={formHandler}
@@ -184,14 +179,13 @@ const sendFile = async () => {
         // hidden accept="image/*" multiple type="file" 
         multiple type="file" hidden accept="application/pdf, application/zip, application/vnd.rar" onChange={handleChangeFile}/>
       </Button>
+      <br/>
       <Autocomplete
       disablePortal
       id="combo-box-demo"
       options={edited}
       onChange={(event,value) => {
-          // console.log(event,value)
               setDatainput((preMy) => ({ ...preMy, groups: value.id }))
-              console.log(datainput)
         }}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Группа" />}

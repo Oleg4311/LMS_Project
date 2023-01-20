@@ -24,8 +24,6 @@ export default function Profileedit() {
     const [city, setCity] = useState('')
 
     const formHandler = (e) => {
-      // console.log('=====>', e.target.value, e.target.name)
-      // e.preventDefault();
       setDatainput((preMy) => ({ ...preMy, [e.target.name]: e.target.value }))
     }
 
@@ -77,7 +75,6 @@ const sendFile = async () => {
             )
           ).json();
           // set state when the data received
-          console.log(123)
           setData(data);
           setImgSrc(`/images/${data?.photo}`)
           // setCity(data.city)
@@ -91,7 +88,6 @@ const sendFile = async () => {
        function handleChange (event) {
         setImg(event.target.files[0])
       }
-      console.log(city)
   return (
     <Box>
     <Grid container spacing={2} columns={16}>
@@ -120,7 +116,6 @@ const sendFile = async () => {
       <TextField
           id="filled-helperText"
           label="Город"
-          // defaultValue={city || ''}
           type="text"
           value={datainput.city || ''}
           variant="filled"
@@ -135,7 +130,6 @@ const sendFile = async () => {
           id="filled-helperText"
           value={datainput.phone || ''}
           label="Телефон"
-          defaultValue=""
           variant="filled"
           onChange={formHandler}
           name="phone"
@@ -148,7 +142,6 @@ const sendFile = async () => {
           id="filled-helperText"
           value={datainput.telegram || ''}
           label="Телеграм"
-          defaultValue=""
           variant="filled"
           onChange={formHandler}
           name="telegram"
@@ -161,7 +154,6 @@ const sendFile = async () => {
           id="filled-helperText"
           value={datainput.email || ''}
           label="Email"
-          defaultValue=""
           variant="filled"
           onChange={formHandler}
           name="email"
@@ -174,7 +166,6 @@ const sendFile = async () => {
           id="filled-helperText"
           value={datainput.github || ''}
           label="Github"
-          defaultValue=""
           variant="filled"
           onChange={formHandler}
           name="github"
@@ -197,7 +188,7 @@ const sendFile = async () => {
       {/* <button onClick={sendFile}>Изменить аватар</button> */}
       <Button variant="contained" color="success" onClick={sendFile}>Изменить аватар</Button>
       <Divider />
-
+  <br/>
       <Button variant="contained" color="success" onClick={updateInfo}>Cохранить </Button>
 
   </Grid>

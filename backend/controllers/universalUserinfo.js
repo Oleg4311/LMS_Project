@@ -10,7 +10,6 @@ exports.universalUserinfo = async (req, res) => {
       
             }
         );
-        console.log('11111',userinform);
         res.json(userinform)
     } catch (error) {
         console.log('ERROR LIST==>', error.message);

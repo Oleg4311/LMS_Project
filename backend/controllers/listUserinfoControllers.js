@@ -10,20 +10,7 @@ exports.listUserinfo = async (req, res) => {
       
             }
         );
-        console.log('11111',userinform);
         res.json(userinform)
-        // const userinform = await UserInfo.findOne({where: {user_id : userId},
-        //     include: { 
-        //       model : Group ,
-        //       where: {
-        //         id: 5
-        //       }, 
-        //     },
-      
-        //     }
-        // );
-        // console.log('11111',userinform);
-        // res.json(userinform)
     } catch (error) {
         console.log('ERROR LIST==>', error.message);
     }

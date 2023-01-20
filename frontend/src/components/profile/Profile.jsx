@@ -28,7 +28,6 @@ export default function Profile() {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data.photo}`)
-          console.log(data)
         };
         dataFetch();
       }, []);
@@ -91,6 +90,7 @@ export default function Profile() {
         src={ImgSrc}
         sx={{ width: 250, height: 250 }}
       />
+      <br/>
       <Button variant="contained" onClick={() => navigate("/profileedit")}>Изменить информацию</Button>
   </Grid>
   </Grid>

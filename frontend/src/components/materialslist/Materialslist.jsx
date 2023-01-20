@@ -14,8 +14,13 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import BackButton from '../backButton/BackButton'
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Materialslist() {
+
+  const getUserRole = useSelector((store) => store.profile.userRole);
+
   const [data, setData] = useState();
   // const [studentid, setStudentid] = useState();
     const {id} = useParams();
@@ -29,14 +34,7 @@ export default function Materialslist() {
           )
         ).json();
         // set state when the data received
-        console.log(dataReq)
-        // console.log()
         setData(dataReq);
-        // console.log(data)
-        // console.log("1111",data)
-        // setImgSrc(`/images/${data?.photo}`)
-        // setCity(data.city)
-        // setDatainput(data)
       };
       dataFetch();
     }, []);
@@ -52,6 +50,7 @@ export default function Materialslist() {
 
   return (
     <>
+    {(getUserRole === 'teacher') ? (<BackButton/>) : (<></>)}
     {/* <iframe
       width="290"
       height="190"
@@ -66,7 +65,7 @@ export default function Materialslist() {
         <> 
         { item.Files[0].url.includes('youtube') ? (
           <>
-          <Accordion>
+          <Accordion key={crypto.randomUUID()}>
           <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -83,7 +82,7 @@ export default function Materialslist() {
       height="190"
       src={`https://www.youtube.com/embed/${item.Files[0].url.split("=")[1]}`}
       title="Youtube Player"
-      frameborder="0"
+      frameBorder="0"
       allowFullScreen
     />
     </div>
@@ -93,7 +92,7 @@ export default function Materialslist() {
         {item?.Files.map((i) => {
           return (
             <>
-        <div>
+        <div key={crypto.randomUUID()}>
             
         <Link href={`http://localhost:3100/downloadfile/${i.name}`} underline="hover">
         {i.name}<FileDownloadIcon/>
@@ -129,7 +128,7 @@ export default function Materialslist() {
         {item?.Files.map((i) => {
           return (
             <>
-        <div>
+        <div key={crypto.randomUUID()}>
         <Link href={`http://localhost:3100/downloadfile/${i.name}`} underline="hover">
         {i.name}<FileDownloadIcon/>
       </Link>

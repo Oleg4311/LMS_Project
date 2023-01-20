@@ -12,7 +12,6 @@ exports.lecturesall = async (req, res) => {
             model : File , 
           },
       });
-      console.log("111111",lecture)
         res.json(lecture);
       } catch (error) {
           console.log('ERROR LIST==>', error.message);

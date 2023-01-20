@@ -8,8 +8,6 @@ exports.updateinfo = async (req, res) => {
           { where: { user_id: req.session.currentUserId } },
         );
         res.json(update);
-        console.log(update)
-        console.log(req.body.user_id)
       } catch (error) {
         console.log(error);
       }

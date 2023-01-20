@@ -7,7 +7,6 @@ const router = Router ()
 // router.post('/uploadfile', fileMiddleware.single('file'), async (req,res) => {
     router.post('/uploadfile', fileMiddleware.array('file',2), async (req,res) => {
     try {
-        console.log(req.files[0],"11111111")
         if (req.files){
             // res.json(req.file)
             // res.json({ user: 'geek' })
@@ -27,7 +26,6 @@ const router = Router ()
                   lectures_id: lecturesload?.id
                 }))
                 await File.bulkCreate(files);
-                console.log(files)
 
             // const filecreate = await File.create(
             //     { name: req?.file.filename ,

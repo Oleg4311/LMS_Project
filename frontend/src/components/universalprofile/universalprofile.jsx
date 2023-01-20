@@ -13,7 +13,6 @@ import BackButton from '../backButton/BackButton';
 export default function Universalprofile() {
 
     const { id } = useParams();
-    console.log(id)
 
     const [data, setData] = useState();
     const [ImgSrc, setImgSrc] = useState('');
@@ -30,8 +29,6 @@ export default function Universalprofile() {
           // set state when the data received
           setData(data);
           setImgSrc(`/images/${data.photo}`)
-          console.log(data)
-          console.log(data)
         };
         dataFetch();
       }, []);
