@@ -146,7 +146,7 @@ function VoteList() {
                                 <TableCell style={{cursor: "pointer"}} component="th" scope="row"
                                            onClick={() => navigate(`/votes/${vote.id}`)}>
                                     {vote.name}
-                                    {vote?.Answers?.length < 1 && profile.userRole === "student" &&
+                                    {vote?.Answers?.filter(el => `${el.user_id}` === `${profile.userId}`)?.length < 1 && profile.userRole === "student" &&
                                         <Chip sx={{marginLeft: 2}} label="NEW" color="success"/>}
                                 </TableCell>
                                 {profile.userRole === "teacher" &&
