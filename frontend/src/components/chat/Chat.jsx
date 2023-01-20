@@ -24,6 +24,7 @@ function Chat() {
     const [chatName, setChatName] = useState("");
     const [ourId, setOurId] = useState("");
     const [isPublic, setIsPublic] = useState(false);
+    const [img, setImg] = useState("");
 
     useEffect(() => {
         if (!chatId) return;
@@ -53,6 +54,7 @@ function Chat() {
             setChatName(data.name);
             setOurId(data.our_id);
             setIsPublic(data.isPublic);
+            setImg(data.img);
         })
 
         // {messages:[], chat_name: "Main public"}
@@ -103,7 +105,8 @@ function Chat() {
                         marginBottom: "-5px",
                         backgroundColor: "#b7b7b7",
                     }}
-                    src={`https://avatars.dicebear.com/api/bottts/${chatName}.svg`}
+
+                    src={img ? `/images/${img}` : `https://avatars.dicebear.com/api/bottts/${chatName}.svg`}
                     alt=""
                 />
                 <span style={{marginLeft: "8px", fontWeight: "bold", color: "#d7a7eb"}}>{chatName}</span>

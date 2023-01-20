@@ -25,7 +25,7 @@ exports.allVotes = async (req, res) => {
         try {
             const allVotes = await Vote.findAll({
                     where: {
-                        group_id: group_id
+                        group_id: group_id,
                     },
                     include: [
                         {

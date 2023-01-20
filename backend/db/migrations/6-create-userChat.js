@@ -19,12 +19,21 @@ module.exports = {
           key: "id",
         },
       },
+      profile_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+      },
       room_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "Rooms",
           key: "id",
         },
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
       },
       isGroup: {
         type: Sequelize.BOOLEAN,
